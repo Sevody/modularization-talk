@@ -1,2 +1,2 @@
 # modularization-talk
-## modularization presentation base on reveal.js
+Javascript modularization presentation base on reveal.js
