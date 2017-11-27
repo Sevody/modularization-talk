@@ -253,12 +253,11 @@
 							<img src="attach/commonjs-logo.png" class="logo" style="max-width:200px" />
 
 							> *javascript:<br> not just for browsers any more!*
-
-<!-- CommonJS是为JS的表现来制定de规范，因为js没有模块的功能所以CommonJS应运而生，它希望js可以在任何地方运行，不只是浏览器中。
--->
+<!-- CommonJS是为JS的表现来制定de规范，因为js没有模块的功能所以CommonJS应运而生，它希望js可以在任何地方运行，不只是浏览器中。-->
+<!-- 这个项目最开始是由 Mozilla 的工程师 Kevin Dangoor 在2009年1月创建的，当时的名字是 ServerJS。 -->
+<!-- 2009年8月，这个项目改名为 CommonJS，以显示其 API 的更广泛实用性。CommonJS 是一套规范，它的创建和核准是开放的。这个规范已经有很多版本和具体实现。 -->
 <!-- CommonJS API定义很多普通应用程序（主要指非浏览器的应用）使用的API，从而填补了这个空白。它的终极目标是提供一个类似Python，Ruby和Java标准库。这样的话，开发者可以使用CommonJS API编写应用程序，然后这些应用可以运行在不同的JavaScript解释器和不同的主机环境中。
 -->
-
 <!--  CommonJS能有一定的影响力，离不开Node的人气，那么，Node，CommonJS，浏览器甚至是W3C之间有什么关系呢
 -->
 						</script>
@@ -280,6 +279,8 @@
 						<li>CommonJS是一种规范</li>
 
 						<li style="padding-top:3%">NodeJS是这种规范的实现</li>
+<!-- 2013年5月，Node.js 的包管理器 NPM 的作者 Isaac Z. Schlueter 说 CommonJS 已经过时，Node.js 的内核开发者已经废弃了该规范。 -->
+<!-- https://github.com/nodejs/node-v0.x-archive/issues/5132#issuecomment-15432598 -->
 						</ul>
 						</div>
 						<!-- .element: class="fragment" -->
@@ -303,8 +304,9 @@
 						```
 
 					</script>
+<!-- CommonJS 规范是为了解决 JavaScript 的作用域问题而定义的模块形式，可以使每个模块它自身的命名空间中执行。 -->
+<!-- 模块必须通过 module.exports 导出对外的变量或接口，通过 require() 来导入其他模块的输出到当前模块作用域中 -->
 				</section>
-			
 				<section data-markdown>
 					<script type="text/template">
 						[NodeJS](http://nodejs.org) : Simple HTTP Server
