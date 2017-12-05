@@ -6,9 +6,6 @@
 
 		<title>Javascript 模块化</title>
 
-		<meta name="description" content="A framework for easily creating beautiful presentations using HTML">
-		<meta name="author" content="Hakim El Hattab">
-
 		<meta name="apple-mobile-web-app-capable" content="yes">
 		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
@@ -624,9 +621,30 @@
 					 ### UMD?
 
 					 TODO...
+
+					 ```javascript
+					 (function (root, factory) {
+							if (typeof define === 'function' && define.amd) {
+									// AMD
+									define(['jquery'], factory);
+							} else if (typeof exports === 'object') {
+									// Node, CommonJS-like
+									module.exports = factory(require('jquery'));
+							} else {
+									// Browser globals (root is window)
+									root.returnExports = factory(root.jQuery);
+							}
+						}(this, function ($) {
+								// methods
+								function myFunc(){};
+						
+								// exposed public method
+								return myFunc;
+						}));
+					```
 				</script>
 			</section>
-
+<!-- 人们又想出另一个更通用的模式UMD （Universal Module Definition）。希望解决跨平台的解决方案。 -->
 				<section data-markdown>
 					<script tpye="text/template">
 						## *Module Loader*
@@ -708,6 +726,7 @@
 					</script>
 				</section>
 
+				<!-- 就模块及依赖管理这个问题而言，已经有RequireJS[]这些优秀的作品。而现在，Browserify又给了我们新的选择。 -->
 <!-- Browserify 跟其它模块化方案有点不同，它并非在「运行时」加载模块，而是在「构建时」对模块进行打包。
 -->
 				<section data-markdown>
@@ -743,6 +762,30 @@
 					4. 得到每个模块的依赖关系，生成一个依赖字典
 
 					5. 包装每个模块生成用于执行的js
+
+					```javascript
+					// name.js：
+					module.exports = "aya";
+					
+					// main.js：
+					var name = require("./name");
+					
+					console.log("Hello! " + name);
+					
+					// 然后对main.js运行Browserify，得到的bundle.js的文件内容是这样的：
+					(function e(t, n, r) {
+							// ...
+					})({
+							1: [function (require, module, exports) {
+									var name = require("./name");
+					
+									console.log("Hello! " + name);
+							}, {"./name": 2}],
+							2: [function (require, module, exports) {
+									module.exports = "aya";
+							}, {}]
+					}, {}, [1])
+					```					
 					</script>
 				</section>
 
@@ -780,7 +823,102 @@ Instagram 工程师认为这个方案很棒, 似乎还把作者招过去了 -->
 
 					</script>
 				</section>
+				<section>
+					<section data-markdown>
+						<script type="text/template">
+							## DEMO TIME
+	
+							```
+							// module.js
+							const hello = "Hello World"
+							module.exports = hello
+	
+							// main.js
+							const hello = require('./module')
+							console.log(hello)
 
+							// webpack.config.js
+							module.exports = {
+								entry: './main.js',
+								output: {
+									filename: 'bundle.js'
+								}
+							};							
+							```
+
+							<!-- .element: class="fragment" -->
+							```bash
+							$ webpack
+							```
+						</script>
+					</section>
+					<section data-markdown>
+						<script type="text/template">
+								bundle.js
+
+								```javascript
+								/******/ (function(modules) { // webpackBootstrap
+									/******/ 	// The module cache
+									/******/ 	var installedModules = {};
+									
+									/******/ 	// The require function
+									/******/ 	function __webpack_require__(moduleId) {
+									
+									/******/ 		// Check if module is in cache
+									/******/ 		if(installedModules[moduleId])
+									/******/ 			return installedModules[moduleId].exports;
+									
+									/******/ 		// Create a new module (and put it into the cache)
+									/******/ 		var module = installedModules[moduleId] = {
+									/******/ 			exports: {},
+									/******/ 			id: moduleId,
+									/******/ 			loaded: false
+									/******/ 		};
+									
+									/******/ 		// Execute the module function
+									/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+									
+									/******/ 		// Flag the module as loaded
+									/******/ 		module.loaded = true;
+									
+									/******/ 		// Return the exports of the module
+									/******/ 		return module.exports;
+									/******/ 	}
+									
+									
+									/******/ 	// expose the modules object (__webpack_modules__)
+									/******/ 	__webpack_require__.m = modules;
+									
+									/******/ 	// expose the module cache
+									/******/ 	__webpack_require__.c = installedModules;
+									
+									/******/ 	// __webpack_public_path__
+									/******/ 	__webpack_require__.p = "";
+									
+									/******/ 	// Load entry module and return exports
+									/******/ 	return __webpack_require__(0);
+									/******/ })
+									/************************************************************************/
+									/******/ ([
+									/* 0 */
+									/***/ (function(module, exports, __webpack_require__) {
+									
+										const hello = __webpack_require__(1)
+										console.log(hello)
+									
+									/***/ }),
+									/* 1 */
+									/***/ (function(module, exports) {
+									
+										const hello = "Hello World"
+										module.exports = hello
+									
+									/***/ })
+									/******/ ]);
+								```
+						</script>
+					</section>
+				</section>
 				<section data-markdown>
 					<script type="text/template">
 						Is webpack just the other Browserify?
