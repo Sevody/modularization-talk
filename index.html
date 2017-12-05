@@ -40,11 +40,11 @@
 			<div class="slides">
 				<section style="margin-top:3%" data-markdown>
 					<script type="text/template">
-						## JavaScript 模块化
+						# JavaScript 模块化
 						
-						*javascript modularization*
+						## *Javascript Modularization*
 						
-						**jay**
+						**Jay**
 					</script>
 				</section>
 <!-- 一个模块就是实现特定功能的文件，有了模块，我们就可以更方便地使用别人的代码，想要什么功能，就加载什么模块。-->
@@ -52,21 +52,18 @@
 					<script type="text/template">
 						### why mudular?
 
-						- Web sites are turning into *Web Apps*
+						- Web sites 进化到了 *Web Apps*
 						<!-- .element: class="fragment" -->
 
-						- Code *complexity* grows as the site gets bigger
+						- 代码的逻辑处理越来越复杂
 						<!-- .element: class="fragment" -->
 
-						- Highly *decoupled* JS files/modules is wanted
+						- 代码解耦
 						<!-- .element: class="fragment" -->
 
-<!-- 模块化的需求是规模的产物，当前的web开发已经慢慢从 web sites进化到了web application，那么这就会导致 
--->
-<!-- 代码的逻辑处理越来越复杂，js代码也越来越多，多人协作的情况下难以管理代码,我们想要的是 
--->
-<!-- 低耦合的JS模块，开发者仅仅关心自己的业务代码，其他都加载别人写好的模块 
--->
+<!-- 模块化的需求是规模的产物，当前的web开发已经慢慢从 web sites进化到了web application，那么这就会导致 -->
+<!-- 代码的逻辑处理越来越复杂，js代码也越来越多，多人协作的情况下难以管理代码,我们想要的是 -->
+<!-- 低耦合的JS模块，开发者仅仅关心自己的业务代码，其他都加载别人写好的模块 -->
 							
 					</script>
 				</section>
@@ -76,10 +73,7 @@
 						# *Module?*
 						模块化编程
 
-<!--拆分原本巨大的js文件，把独立的逻辑放到单文件里，
-	被其他文件引用。
-	然后把需要的js文件块引入到页面上
--->
+<!--拆分原本巨大的js文件，把独立的逻辑放到单文件里，被其他文件引用，然后把需要的js文件块引入到页面上-->
 					</script>
 				</section>
 
@@ -105,12 +99,12 @@
 						简单封装：*Namespace* 模式
 
 						```javascript
-						var KMC = {
+						var Moudle = {
 							foo: function(){},
 							bar: function(){}
 						}
 
-						KMC.foo();
+						Module.foo();
 						```
 
 						- 减少 Global 上的变量数目
@@ -127,7 +121,7 @@
 
 						```javascript
 						var Module = (function(){
-							var _private = "safe now";
+							var _private = "我是私有变量";
 							var foo = function(){
 								console.log(_private)
 							}
@@ -162,9 +156,8 @@
 						Module.foo();
 						```
 						<p class="fragment">
-                            这就是<em><b>模块模式</b></em><br>
-                            也是现代模块实现的基石
-                        </p>
+							这就是<em><b>模块模式</b></em><br>也是现代模块实现的基石
+						</p>
 
 					</script>
 				</section>
@@ -179,15 +172,15 @@
 
 				<section data-markdown>
 					<script type="text/template">
-						### Let's back to script tags
+						### 脚本加载
 
 						```
 						body
-							script(src="jquery.js")
-							script(src="app.js")	//do some $ things...
+							script(src="vue.js")
+							script(src="app.js") //new Vue() 
 						```
 
-						###*Order is essential*
+						####*顺序非常重要*
 						<!-- .element: class="fragment" -->
 						<!-- DOM 顺序即执行顺序 -->
 					</script>
@@ -199,20 +192,17 @@
 
 						```
 						body
-							script(src="react.js")
-							script(src="react-dom.js")
-							script(src="kmc-env.js")
-							script(src="kmc-pageController.js")
-							script(src="kmc-homeUserinfoLogined.js")
-							script(src="kmc-homeUserinfoUnlogin.js")
-							script(src="kmc-buttonWithImgLabel.js")
-							script(src="kmc-shortcutMenu.js")
-							script(src="kmc-kmc-skinController.js")
-							script(src="kmc-submit.js")
-							script(src="kmc-switch.js")
-							script(src="kmc-sepline.js")
-							script(src="kmc-menuListWithImg.js")
-							script(src="ggt-home.js.js")
+							script(src="vue")
+							script(src="vuex")
+							script(src="vue-router")
+							script(src="router.js")
+							script(src="icon.js")
+							script(src="button.js")
+							script(src="header.js")
+							script(src="content.js")
+							script(src="home.js")
+							script(src="app.js")
+							script(src="main.js")
 						```
 					</script>
 				</section>
@@ -221,23 +211,20 @@
 					<script type="text/template">
 						### Dependency Hell
 
-						- 难以维护 *Very difficult to maintain*
+						- 依赖模糊
+						
+						- 难以维护
 
-						- 依赖模糊 *Unclear Dependencies*
-
-						- 请求过多 *Too much HTTP calls*
 					</script>
 				</section>
-<!-- 无法管理依赖，所有的代码都必须load到内存中，需要哪些模块, 模块的载入顺序必须由人工处理。分模块是工程化的产物，也是自然发展的结果，自然有很多尝试。很显然，模块之间互相依赖需要编写模块的时候遵循一定的规范
+<!-- 依赖模糊，需要哪些模块, 模块的载入顺序必须由人工处理。
+	只有封装性可不够，我们还需要加载。很显然，模块之间互相依赖需要编写模块的时候遵循一定的规范。
 -->
-<!-- 只有封装性可不够，我们还需要加载 -->
+
 <!-- CommonJS -->
 				<section data-markdown>
 					<script type="text/template">
 						# *CommonJS*
-
-						
-						
 					</script>
 				</section>
 
@@ -251,11 +238,13 @@
 							<img src="attach/commonjs-logo.png" class="logo" style="max-width:200px" />
 
 							> *javascript: not just for browsers any more!*
-<!-- CommonJS是为JS的表现来制定de规范，因为js没有模块的功能所以CommonJS应运而生，它希望js可以在任何地方运行，不只是浏览器中。-->
-<!-- 这个项目最开始是由 Mozilla 的工程师 Kevin Dangoor 在2009年1月创建的，当时的名字是 ServerJS。 -->
-<!-- 2009年8月，这个项目改名为 CommonJS，以显示其 API 的更广泛实用性。CommonJS 是一套规范，它的创建和核准是开放的。这个规范已经有很多版本和具体实现。 -->
-<!-- CommonJS API定义很多普通应用程序（主要指非浏览器的应用）使用的API，从而填补了这个空白。它的终极目标是提供一个类似Python，Ruby和Java标准库。这样的话，开发者可以使用CommonJS API编写应用程序，然后这些应用可以运行在不同的JavaScript解释器和不同的主机环境中。
+<!-- CommonJS是为JS的表现来制定de规范，因为js没有模块的功能所以CommonJS应运而生，它希望js可以在任何地方运行，不只是浏览器中。
+	这个项目最开始是由 Mozilla 的工程师 Kevin Dangoor 在2009年1月创建的，当时的名字是 ServerJS。
+	2009年8月，这个项目改名为 CommonJS，来显示它 API 的更广泛的实用性。
+	CommonJS API定义了很多普通应用程序（主要指非浏览器的应用）使用的API，它的终极目标是提供一个类似Python，Ruby和Java标准库。
+	这样的话，开发者可以使用CommonJS API编写应用程序，然后这些应用可以运行在不同的JavaScript解释器和不同的主机环境中。
 -->
+
 <!--  CommonJS能有一定的影响力，离不开Node的人气，那么，Node，CommonJS，浏览器甚至是W3C之间有什么关系呢
 -->
 						</script>
@@ -277,12 +266,12 @@
 						<li>CommonJS是一种规范</li>
 
 						<li style="padding-top:3%">NodeJS是这种规范的实现</li>
-<!-- 2013年5月，Node.js 的包管理器 NPM 的作者 Isaac Z. Schlueter 说 CommonJS 已经过时，Node.js 的内核开发者已经废弃了该规范。 -->
-<!-- https://github.com/nodejs/node-v0.x-archive/issues/5132#issuecomment-15432598 -->
 						</ul>
 						</div>
 						<!-- .element: class="fragment" -->
 					</section>
+	<!-- 2013年5月，Node.js 的包管理器 NPM 的作者 Isaac Z. Schlueter 说 CommonJS 已经过时，Node.js 的内核开发者已经废弃了该规范。 -->
+	<!-- https://github.com/nodejs/node-v0.x-archive/issues/5132#issuecomment-15432598 -->
 					
 				</section>
 				<section>
@@ -301,116 +290,44 @@
 							var math = require('math');		//  ./math in node
 							console.log(math.add(1, 2));	  // 3
 							```
-
 						</script>
 <!-- CommonJS 规范是为了解决 JavaScript 的作用域问题而定义的模块形式，可以使每个模块它自身的命名空间中执行。 -->
 <!-- 模块必须通过 module.exports 导出对外的变量或接口，通过 require() 来导入其他模块的输出到当前模块作用域中 -->
 					</section>
 					<section data-markdown>
 						<script type="text/template">
+							exports? module.exports?
 							```javascript
-								module.exports.hello = true; // Exported from require of module
-								exports = { hello: false };  // Not exported, only available in the module
-							```
-
-							```javascript
-								module.exports = exports = function Constructor() {
-									// ... etc.
-								};
+								module.exports.hello = true;
+								exports = { hello: false };  //not exported
 							```
 
 							```javascript
 								function require(/* ... */) {
 									const module = { exports: {} };
 									((module, exports) => {
-										// Your module code here. In this example, define a function.
 										function someFunc() {}
 										exports = someFunc;
-										// At this point, exports is no longer a shortcut to module.exports, and
-										// this module will still export an empty default object.
+										// exports 不再是 module.exports 的引用
+										
 										module.exports = someFunc;
-										// At this point, the module will now export someFunc, instead of the
-										// default object.
+										// 正常返回目标函数
 									})(module, module.exports);
 									return module.exports;
 								}							
 							```
-						</script>
-					</section>
-				</section>
-				<section>
-					<section data-markdown>
-						<script type="text/template">
-							[NodeJS](http://nodejs.org) : Simple HTTP Server
-
-							```javascript
-							//server.js
-							var http = require("http"),
-								PORT = 8000;
-
-							http.createServer(function(req, res){
-								res.end("Hello World");
-							}).listen(PORT);
-
-							console.log("listenning to " + PORT);
-							```
-							
-							```
-							$ node server.js
-							```
 							<!-- .element: class="fragment" -->
 
 						</script>
-					</section>					
-					<section data-markdown>
-						<script type="text/template">
-							require的内部处理流程
-							
-							require命令是CommonJS规范之中，用来加载其他模块的命令。
-							它其实不是一个全局命令，而是指向当前模块的module.require命令，而后者又调用Node的内部命令Module._load。
-
-							```javascript
-							Module._load = function(request, parent, isMain) {
-								// 1. 检查 Module._cache，是否缓存之中有指定模块
-								// 2. 如果缓存之中没有，就创建一个新的Module实例
-								// 3. 将它保存到缓存
-								// 4. 使用 module.load() 加载指定的模块文件，
-								//    读取文件内容之后，使用 module.compile() 执行文件代码
-								// 5. 如果加载/解析过程报错，就从缓存删除该模块
-								// 6. 返回该模块的 module.exports
-							};
-
-							// 上面的第4步，采用module.compile()执行指定模块的脚本，逻辑如下。
-							Module.prototype._compile = function(content, filename) {
-								// 1. 生成一个require函数，指向module.require
-								// 2. 加载其他辅助方法到require
-								// 3. 将文件内容放到一个函数之中，该函数可调用 require
-								// 4. 执行该函数
-							};
-
-							// 上面的第1步和第2步，require函数及其辅助方法主要如下。
-							// require(): 加载外部模块
-							// require.resolve()：将模块名解析到一个绝对路径
-							// require.main：指向主模块
-							// require.cache：指向所有缓存的模块
-							// require.extensions：根据文件的后缀名，调用不同的执行函数
-
-							// 一旦require函数准备完毕，整个所要加载的脚本内容，就被放到一个新的函数之中，
-							// 这样可以避免污染全局环境。该函数的参数包括require、module、exports，以及其他一些参数。
-							(function (exports, require, module, __filename, __dirname) {
-								// YOUR CODE INJECTED HERE!
-							});
-							```
-						</script>						
 					</section>
 				</section>
 
 				<section data-markdown>
 					<script type="text/template">
-						### Synchronously
+						加载方式
 
 						```javascript
-						//timeout.js
+						//task.js
 						var EXE_TIME = 2;
 
 						(function(section){
@@ -422,32 +339,19 @@
 						```
 						```
 						//main.js
-						require('./timeout');	// sync load
+						require('./task');	// sync load
 						console.log('done!');
 						```
 
 						*同步/阻塞式加载*
 						<!--  .element: class="fragment" -->
+
+						*~~浏览器环境~~*
+						<!--  .element: class="fragment" -->
 					</script>
 				</section>
+<!-- 同步加载对服务器/本地环境并不是问题, 浏览器环境才是问题 -->
 
-
-				<section data-markdown>
-					<script type="text/template">
-						同步加载对服务器/本地环境并不是问题
-
-						 硬盘 I/O | | 网速 I/O
-						-----|------- | ------|-------
-						HDD: | *100 MB/s*  | ADSL: | *4 Mb/s*
-						SSD: | *600 MB/s*  | 4G: | *100 Mb/s*
-						SATA-III:| *6000 Mb/s*  | Fiber: | *100 Mb/s*
-
-						<br>
-
-						### *浏览器环境才是问题*
-						<!-- .element: class="fragment" -->
-					</script>
-				</section>
 <!-- AMD/CMD -->
 				<section data-markdown>
 					<script type="text/template">
@@ -490,10 +394,10 @@
 -->
 				<section data-markdown>
 					<script type="text/template">
-						If `require()` is async?
+						异步的`require()`
 
 						```
-						//CommonJS Syntax
+						//CommonJS 语法
 						var Employee = require("types/Employee");
 
 						function Programmer (){
@@ -502,21 +406,17 @@
 
 						Programmer.prototype = new Employee();
 
-						//如果 require call 是异步的，那么肯定 error
+						//如果 require 是异步的，那么肯定 error
 						//因为在执行这句前 Employee 模块根本来不及加载进来
 						```
-
-						*this code will not work*
-						<!-- .element: class="fragment" -->
 					</script>
 				</section>
 
 				<section data-markdown>
 					<script type="text/template">
-						### *Function Wrapping*
+						*AMD*函数包装
 
 						```
-						//AMD Wrapper
 						define(
 							["types/Employee"],  //依赖
 							function(Employee){  //这个回调会在所有依赖都被加载后才执行
@@ -525,13 +425,14 @@
 								};
 
 								Programmer.prototype = new Employee();
-								return Programmer;  //return Constructor
+								return Programmer; 
 							}
 						)
 						```
 					</script>
 				</section>
-
+<!-- 第一个参数，dependencies ，是一个当前模块依赖的，已被模块定义的模块标识的数组字面量。 -->
+<!-- 第二个参数，factory，是一个需要进行实例化的函数或者一个对象。 -->
 				<section data-markdown>
 					<script type="text/template">
 						执行时机
@@ -554,9 +455,6 @@
 							alert(math.add(1,1));
 						});
 						```
-
-						*Early Download, Early Executing*
-						<!-- .element: class="fragment" -->
 					</script>
 				</section>
 
@@ -574,7 +472,7 @@
 <!--Sea.js 追求简单、自然的代码书写和组织方式-->
 				<section data-markdown>
 					<script type="text/template">
-						*More like CommonJS Style*
+						*CMD*语法
 
 						```javascript
 						define(function(require, exports) {
@@ -590,19 +488,17 @@
 
 				<section data-markdown>
 					<script type="text/template">
-					*AMD vs CMD - the truly different*
-
-					### Still Execution Time
+					*AMD vs CMD*
 
 					```
-					// AMD recommended
+					// AMD
 					define(['a', 'b'], function(a, b){
 						a.doSomething();    // 依赖前置，提前执行
 						b.doSomething();
 					})
 					```
 					```
-					// CMD recommanded
+					// CMD
 					define(function(require, exports, module){
 						var a = require("a");
 						a.doSomething();
@@ -611,40 +507,30 @@
 					})
 
 					```
-
-					*Early Download, Lazy Executing*
 					</script>
 				</section>
 				
-			<section data-markdown>
-				<script type="text/template">
-					 ### UMD?
+				<section data-markdown>
+					<script type="text/template">
+						### *UMD*
 
-					 TODO...
-
-					 ```javascript
-					 (function (root, factory) {
+						```javascript
+						(function (root, factory) {
 							if (typeof define === 'function' && define.amd) {
-									// AMD
-									define(['jquery'], factory);
+								define(['jquery'], factory);
 							} else if (typeof exports === 'object') {
-									// Node, CommonJS-like
-									module.exports = factory(require('jquery'));
+								module.exports = factory(require('jquery'));
 							} else {
-									// Browser globals (root is window)
-									root.returnExports = factory(root.jQuery);
+								root.returnExports = factory(root.jQuery);
 							}
 						}(this, function ($) {
-								// methods
-								function myFunc(){};
-						
-								// exposed public method
-								return myFunc;
+							return myFunc(){};
 						}));
-					```
-				</script>
-			</section>
+						```
+					</script>
+				</section>
 <!-- 人们又想出另一个更通用的模式UMD （Universal Module Definition）。希望解决跨平台的解决方案。 -->
+
 				<section data-markdown>
 					<script tpye="text/template">
 						## *Module Loader*
@@ -662,9 +548,8 @@
 						# *Browserify/Webpack*
 					</script>
 				</section>
-<!-- 是预编译模块的方案, 它是预编译的，不需要在浏览器中加载解释器, 用它可以本地直接写JS，不管是什么风格的模块化，它都能认识，并且编译成浏览器认识的JS。 
--->
-				
+<!-- 是预编译模块的方案, 它是预编译的，不需要在浏览器中加载解释器, 用它可以本地直接写JS，不管是什么风格的模块化，它都能认识，并且编译成浏览器认识的JS。 -->	
+
 				<section data-markdown>
 					<script type="text/template">
 						###NPM
@@ -676,7 +561,7 @@
 						*npm is the package manager for javascript.*
 
 						```
-						npm install -g react
+						npm install -g vue
 						```
 						<!-- .element: class="fragment" -->
 					</script>
@@ -688,20 +573,16 @@
 						通过package.json进行安装
 						```
 						{
-							"name": "h5-trade-client",
-							"description": "The HTML5 Trade Client of KDS Mobile Stock",
-							"repository": "KDS",
-							"version": "0.1.0",
-							"author": "KDS App Develop Team",
+							"name": "web-mall",
 							"dependencies": {
-								"file-loader": "^0.8.4",
-								"flux": "^2.0.0",
-								"http-server": "^0.8.5",
-								"object-assign": "^1.0.0",
-								"react": "^0.14.0",
-								"react-dom": "^0.14.0",
-								"jquery": "^2.1.4"
-								}
+								"mint-ui": "^2.2.7",
+								"moment": "^2.18.1",
+								"axios": "^0.2.0",
+								"underscore": "^1.8.3",
+								"vue": "^2.2.2",
+								...
+							}
+							...
 						}
 						```
 						```
@@ -725,10 +606,9 @@
 						> *require('modules') in the browser by bundling up all of your dependencies*
 					</script>
 				</section>
+<!-- 就模块及依赖管理这个问题而言，已经有RequireJS这些优秀的作品。而现在，Browserify又给了我们新的选择。 -->
+<!-- Browserify 跟其它模块化方案有点不同，它并非在「运行时」加载模块，而是在「构建时」对模块进行打包。-->
 
-				<!-- 就模块及依赖管理这个问题而言，已经有RequireJS[]这些优秀的作品。而现在，Browserify又给了我们新的选择。 -->
-<!-- Browserify 跟其它模块化方案有点不同，它并非在「运行时」加载模块，而是在「构建时」对模块进行打包。
--->
 				<section data-markdown>
 					<script type="text/template">
 						Install
@@ -736,58 +616,28 @@
 						```
 						$ npm install -g browserify
 						```
-						### *Actually you need do nothing but write CommonJS code!*
-						<!-- .element: class="fragment" -->
-
+						
+						<div type="text/template">
+							And Run
+							
 						```
-						# magic just happened!
 						$ browserify main.js -o bundle.js
 						```
+						</div>
 						<!-- .element: class="fragment" -->
 
 					</script>
 				</section>
-<!-- Browserify将递归分析你的代码中的require()，然后生成编译后的文件（这里的bundle.js）。在编译后的文件内，所有JavaScript模块都已合并在一起且建立好了依赖关系。最后，你在html里引用这个编译后的文件。
+<!-- Browserify将递归分析你的代码中的require()，然后生成编译后的文件（这里的bundle.js）。
+	在编译后的文件内，所有JavaScript模块都已合并在一起且建立好了依赖关系。最后，你在html里引用这个编译后的文件。
 -->
-				<section data-markdown>
-					<script type="text/template">
-					#### *Demo Time*
-
-					1. 从入口模块开始，分析代码中require函数的调用
-
-					2. 生成AST (Abstract Syntax Tree)
-
-					3. 根据AST找到每个模块require的模块名
-
-					4. 得到每个模块的依赖关系，生成一个依赖字典
-
-					5. 包装每个模块生成用于执行的js
-
-					```javascript
-					// name.js：
-					module.exports = "aya";
-					
-					// main.js：
-					var name = require("./name");
-					
-					console.log("Hello! " + name);
-					
-					// 然后对main.js运行Browserify，得到的bundle.js的文件内容是这样的：
-					(function e(t, n, r) {
-							// ...
-					})({
-							1: [function (require, module, exports) {
-									var name = require("./name");
-					
-									console.log("Hello! " + name);
-							}, {"./name": 2}],
-							2: [function (require, module, exports) {
-									module.exports = "aya";
-							}, {}]
-					}, {}, [1])
-					```					
-					</script>
-				</section>
+<!-- 
+	1. 从入口模块开始，分析代码中require函数的调用
+	2. 生成AST (Abstract Syntax Tree)
+	3. 根据AST找到每个模块require的模块名
+	4. 得到每个模块的依赖关系，生成一个依赖字典
+	5. 包装每个模块生成用于执行的js 
+-->
 
 				<section data-markdown>
 					<script type="text/template">
@@ -803,16 +653,18 @@
 <!-- Webpack 是德国开发者 Tobias Koppers 开发的模块打包工具，
 在 Webpack 当中, 所有的资源都被当作是模块, js, css, 图片等等..
 Instagram 工程师认为这个方案很棒, 似乎还把作者招过去了 -->
+
 				<section data-markdown>
 					<script type="text/template">
-						*You can*
+						Run
+
 						```bash
 						$ webpack main.js bundle.js
 						```
 
-						*the better is*
+						Or
 						```javascript
-						// better with a webpack.config.js
+						// webpack.config.js
 						module.exports = {
 							entry: "./main.js",
 							output: {
@@ -820,7 +672,6 @@ Instagram 工程师认为这个方案很棒, 似乎还把作者招过去了 -->
 							}
 						}
 						```
-
 					</script>
 				</section>
 				<section>
@@ -832,11 +683,15 @@ Instagram 工程师认为这个方案很棒, 似乎还把作者招过去了 -->
 							// module.js
 							const hello = "Hello World"
 							module.exports = hello
-	
+							```
+
+							```
 							// main.js
 							const hello = require('./module')
 							console.log(hello)
+							```
 
+							```
 							// webpack.config.js
 							module.exports = {
 								entry: './main.js',
@@ -846,10 +701,10 @@ Instagram 工程师认为这个方案很棒, 似乎还把作者招过去了 -->
 							};							
 							```
 
-							<!-- .element: class="fragment" -->
 							```bash
 							$ webpack
 							```
+							<!-- .element: class="fragment" -->
 						</script>
 					</section>
 					<section data-markdown>
@@ -857,71 +712,57 @@ Instagram 工程师认为这个方案很棒, 似乎还把作者招过去了 -->
 								bundle.js
 
 								```javascript
-								/******/ (function(modules) { // webpackBootstrap
-									/******/ 	// The module cache
-									/******/ 	var installedModules = {};
-									
-									/******/ 	// The require function
-									/******/ 	function __webpack_require__(moduleId) {
-									
-									/******/ 		// Check if module is in cache
-									/******/ 		if(installedModules[moduleId])
-									/******/ 			return installedModules[moduleId].exports;
-									
-									/******/ 		// Create a new module (and put it into the cache)
-									/******/ 		var module = installedModules[moduleId] = {
-									/******/ 			exports: {},
-									/******/ 			id: moduleId,
-									/******/ 			loaded: false
-									/******/ 		};
-									
-									/******/ 		// Execute the module function
-									/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
-									
-									/******/ 		// Flag the module as loaded
-									/******/ 		module.loaded = true;
-									
-									/******/ 		// Return the exports of the module
-									/******/ 		return module.exports;
-									/******/ 	}
-									
-									
-									/******/ 	// expose the modules object (__webpack_modules__)
-									/******/ 	__webpack_require__.m = modules;
-									
-									/******/ 	// expose the module cache
-									/******/ 	__webpack_require__.c = installedModules;
-									
-									/******/ 	// __webpack_public_path__
-									/******/ 	__webpack_require__.p = "";
-									
-									/******/ 	// Load entry module and return exports
-									/******/ 	return __webpack_require__(0);
-									/******/ })
-									/************************************************************************/
-									/******/ ([
+								 (function(modules) { // webpackBootstrap
+										...
+										// 定义 __webpack_require__ 函数
+										return __webpack_require__(0);
+									 })([
 									/* 0 */
-									/***/ (function(module, exports, __webpack_require__) {
-									
+									(function(module, exports, __webpack_require__) {
 										const hello = __webpack_require__(1)
 										console.log(hello)
-									
-									/***/ }),
+									}),
 									/* 1 */
-									/***/ (function(module, exports) {
-									
+									(function(module, exports) {
 										const hello = "Hello World"
 										module.exports = hello
+									})
+								]);
+								```
+						</script>
+					</section>
+					<section data-markdown>
+						<script type="text/template">
+								bundle.js
+
+								```javascript
+								// webpack 实现的 require 函数
+								function __webpack_require__(moduleId) {
+									...// check cache 
 									
-									/***/ })
-									/******/ ]);
+									// Create a new module (and put it into the cache)
+									var module = installedModules[moduleId] = {
+										exports: {},
+										id: moduleId,
+										loaded: false
+									};
+						 
+									// Execute the module function
+									modules[moduleId].call(
+										module.exports, 
+										module, 
+										module.exports, 
+										__webpack_require__);
+						 
+									// Return the exports of the module
+									return module.exports;
+								}
 								```
 						</script>
 					</section>
 				</section>
 				<section data-markdown>
 					<script type="text/template">
-						Is webpack just the other Browserify?
 						## *Webpack Pro*
 					</script>
 				</section>
@@ -971,13 +812,11 @@ Instagram 工程师认为这个方案很棒, 似乎还把作者招过去了 -->
 
 				<section data-markdown>
 					<script type="text/template">
-						#### *require()* static resources!
+						#### *require(静态资源)* 
 
 						```javascript
-						// Ensure the stylesheet is loaded
 						require('./bootstrap.css');
 
-						// get a URL or DataURI
 						var myImage = document.createElement('img');
 						myImage.src = require('./myImage.jpg');
 						```
@@ -1012,6 +851,58 @@ Instagram 工程师认为这个方案很棒, 似乎还把作者招过去了 -->
 					<img src="4853ca667a2b8b8844eb2693ac1b2578.png"> 
 					```
 					<!-- .element: class="fragment" -->
+					</script>
+				</section>
+
+				<section data-markdown>
+					<script type="text/template">
+						### *Code Splitting & Lazy Load*
+
+						```javascript
+						// Lazy load in Vue components
+						Vue.component('AsyncCmp', require.ensure('./AsyncCmp'))
+						```	
+
+						```javascript
+						// Lazy load in Vue router
+						new VueRouter({
+							routes: [
+								{ path: '/login', require.ensure('./login') }
+							]
+						})
+						```
+					</script>
+				</section>
+				<section data-markdown>
+					<script type="text/template">
+						### Treeshaking
+
+						```javascript
+						// foo.js
+						function foo () {
+							// ...
+						}
+						// bar.js
+						const bar = 123
+
+						//main.js
+						// foo(bar)
+						```
+
+						Treeshaking ==>
+						<!-- .element: class="fragment" -->
+
+						```
+						// nothing left
+						```
+						<!-- .element: class="fragment" -->
+
+						```dart
+						if (process.env.NODE_ENV !== 'production') {
+							// code to drop in production build
+						}
+						```
+						<!-- .element: class="fragment" -->
 					</script>
 				</section>
 
@@ -1065,61 +956,10 @@ Instagram 工程师认为这个方案很棒, 似乎还把作者招过去了 -->
 						<!-- .element: class="fragment" -->
 					</script>
 				</section>
-				<section data-markdown>
-					<script type="text/template">
-						## Code Splitting & Lazy Load
-						TODO............
-					
-						
-						```dart
-						// Lazy load in Vue components
-						Vue.component('AsyncCmp', () => import('./AsyncCmp'))
-						```	
 
-						// Lazy load in Vue router
-						const Login = () => import('./login')
-						
-						new VueRouter({
-							routes: [
-								{ path: '/login', component: Login }
-							]
-						})
-						### 
-					</script>
+				<section data-markdown data-background-size="auto" data-background-image="attach/hmr.jpg">
 				</section>
-				<section data-markdown>
-					<script type="text/template">
-						## Treeshaking
-						TODO............
 
-						```dart
-						// foo.js
-						function foo () {
-							// ...
-						}
-						// bar.js
-						const bar = 123
-
-						//main.js
-						// foo(bar)
-						```
-
-						<!-- .element: class="fragment" -->
-						Treeshaking ==>
-
-						<!-- .element: class="fragment" -->
-						```
-						// nothing left
-						```
-
-						<!-- .element: class="fragment" -->
-						```dart
-						if (process.env.NODE_ENV !== 'production') {
-							// code to drop in production build
-						}
-						```
-					</script>
-				</section>
 <!-- Webpack就是一个更出色的前端自动化构建工具、模块化工具、资源管理工具。
 -->
 				<section data-markdown>
@@ -1127,19 +967,8 @@ Instagram 工程师认为这个方案很棒, 似乎还把作者招过去了 -->
 						# *ES6 Module*
 					</script>
 				</section>
-<!-- ECMAScript 6是JavaScript语言的下一代标准，已经在2015年6月正式发布了
+<!-- ECMAScript 6是JavaScript语言的下一代标准，已经在2015年6月正式发布了, 但是没有运行时
 -->
-				<section data-markdown>
-					<script type="text/template">
-						### There is no module in JavaScript!
-
-						<p class="fragment"> (Until *ECMAScript 6*) </p>
-						<!-- .element: class="fragment" -->
-
-						### Well...But there is no runtime...
-						<!-- .element: class="fragment" -->
-					</script>
-				</section>
 
 				<section data-markdown>
 					<script type="text/template">
@@ -1157,14 +986,14 @@ Instagram 工程师认为这个方案很棒, 似乎还把作者招过去了 -->
 					<script type="text/template">
 						### *Default Module 标准导出*
 
-						```dart
+						```javascript
 						// sayHello.js
 						export default function(){
 							console.log('Hello World');
 						}
 						```
 
-						```dart
+						```javascript
 						// main.js
 						import sayHello from "./sayHello";
 						sayHello();
@@ -1182,53 +1011,55 @@ Instagram 工程师认为这个方案很棒, 似乎还把作者招过去了 -->
 					<script type="text/template">
 						### *Named exports 命名导出*
 
-						```dart
-						// data.js
-						var firstName = 'king';
-						var lastName = 'dom';
-						var year = 2015;
+						```javascript
+						// vocaloid.js
+						let firstName = 'Hatsune';
+						let lastName = 'Miku';
+						let year = 2017;
+						let version = '4.0.0'
 
-						export {firstName, lastName, year};
-
+						export {firstName, lastName, year, version};
 						```
-						```dart
-						// app.js
-						import * as Data from './data'
 
-						console.log(Data.firstName, Data.lastName, Data.year);
+						```javascript
+						// app.js
+						import * as Idol from './vocaloid'
+
+						console.log(Idol.firstName, Idol.lastName, Idol.year, Idol.version);
 						```
 
 					</script>
 				</section>
-
 				
 				<section data-markdown>
 					<script type="text/template">
-						## Javascript Module in 2017.12
+						## *Javascript Module in the future*
+					</script>
+				</section>
+				
+				<section data-markdown>
+					<script type="text/template">
+						### *Broswer*
 						
-						### Chrome 61 发布，支持 ES6 模块
-
+						Chrome 61 发布，支持 ES6 模块
+					
 						```html
-						<script type="module" src="main.js"></script>
-						
+						<script type="module" src="main.js">
 						<script type="module">
-								import { addTextToBody } from './utils.js';
-								addTextToBody('Modules are pretty cool.');
-						</script>
-						```
-
-							
+							import { addTextToBody } from './utils.js';
+							addTextToBody('Modules are pretty cool.');
+						```	
 
 					</script>
 				</section>
 
 				<section data-markdown>
 					<script type="text/template">
-						## Javascript Module in the future
-						
-						### Nodejs v8.5.0，实验性的支持 ES6 模块
+						### *Node*
 
-						```dart
+						Nodejs v8.5.0，实验性的支持 ES6 模块
+
+						```javascript
 						// lib.mjs [注意后缀是 mjs]
 						export function add(x, y) {
 								return x + y;
@@ -1240,7 +1071,8 @@ Instagram 工程师认为这个方案很棒, 似乎还把作者招过去了 -->
 						```
 
 						```bash
-						$ node main.mjs --experimental-modules  # 注意加 --experimental-modules
+						# 注意加 --experimental-modules
+						$ node main.mjs --experimental-modules  
 						```
 <!-- 浏览器加载 ES6 模块，也使用<script>标签，但是要加入type="module"属性。 -->
 <!-- 浏览器对于带有type="module"的<script>，都是异步加载，不会造成堵塞浏览器，即等到整个页面渲染完，再执行模块脚本，等同于打开了<script>标签的defer属性。 -->
