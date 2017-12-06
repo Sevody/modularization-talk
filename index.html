@@ -221,7 +221,7 @@
 					</script>
 				</section>
 <!-- 依赖模糊，需要哪些模块, 模块的载入顺序必须由人工处理，难以进行维护。
-	只有封装性可不够，我们还需要加载。很显然，模块之间互相依赖需要编写模块的时候遵循一定的规范。
+	只有封装性可不够，我们还需要加载。很显然，模块之间互相依赖，需要编写模块的时候遵循一定的规范。
 -->
 
 <!-- CommonJS -->
@@ -847,25 +847,46 @@ Instagram 工程师认为这个方案很棒, 似乎还把作者招过去了 -->
 					<!-- .element: class="fragment" -->
 					</script>
 				</section>
+				<section>
+					<section data-markdown>
+						<script type="text/template">
+							### *Code Splitting & Lazy Load*
 
-				<section data-markdown>
-					<script type="text/template">
-						### *Code Splitting & Lazy Load*
+							```javascript
+							// Lazy load in Vue components
+							Vue.component('AsyncCmp', require.ensure('./AsyncCmp'))
+							```	
 
-						```javascript
-						// Lazy load in Vue components
-						Vue.component('AsyncCmp', require.ensure('./AsyncCmp'))
-						```	
+							```javascript
+							// Lazy load in Vue router
+							new VueRouter({
+								routes: [
+									{ path: '/login', require.ensure('./login') }
+								]
+							})
+							```
+						</script>
+					</section>
+					<section data-markdown>
+						<script type="text/template">
+							require.ensure
 
-						```javascript
-						// Lazy load in Vue router
-						new VueRouter({
-							routes: [
-								{ path: '/login', require.ensure('./login') }
-							]
-						})
-						```
-					</script>
+							```javascript
+							__webpack_require__.e = function requireEnsure(chunkId, callback) {
+								...
+								// 通过类似jsonP的方式加载模块
+								installedChunks[chunkId] = [callback];
+								var head = document.getElementsByTagName('head')[0];
+								var script = document.createElement('script');
+								script.type = 'text/javascript';
+								script.charset = 'utf-8';
+								script.async = true;
+								script.src = chunkId + ".bundle.js";
+								head.appendChild(script);
+							};
+							```
+						</script>
+					</section>
 				</section>
 				<section data-markdown>
 					<script type="text/template">
