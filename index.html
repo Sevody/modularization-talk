@@ -47,39 +47,42 @@
 						**Jay**
 					</script>
 				</section>
-<!-- 一个模块就是实现特定功能的文件，有了模块，我们就可以更方便地使用别人的代码，想要什么功能，就加载什么模块。-->
+<!-- 编程是将需求分解成一组函数和数据结构的技能 -->
+<!-- 一个模块可以说实现特定功能的函数和数据结构的集合。-->
+
 				<section data-markdown>
 					<script type="text/template">
-						### why mudular?
+						### 前端变化
 
-						- Web sites 进化到了 *Web Apps*
+						- 前后端分离
 						<!-- .element: class="fragment" -->
 
-						- 代码的逻辑处理越来越复杂
+						- 代码逻辑越来越复杂
 						<!-- .element: class="fragment" -->
 
-						- 代码解耦
+						- 代码解耦与复用
 						<!-- .element: class="fragment" -->
-
-<!-- 模块化的需求是规模的产物，当前的web开发已经慢慢从 web sites进化到了web application，那么这就会导致 -->
-<!-- 代码的逻辑处理越来越复杂，js代码也越来越多，多人协作的情况下难以管理代码,我们想要的是 -->
-<!-- 低耦合的JS模块，开发者仅仅关心自己的业务代码，其他都加载别人写好的模块 -->
+<!-- 
+	为什么要模块化?
+	模块化的需求是规模的产物，自从web开发慢慢从 web 页面进化到了web 应用，前后端分离已经是常态，
+ 	当大部分的业务逻辑从后端移到前端，那么这就会导致，前端的代码逻辑处理越来越复杂，js代码也越来越多，多人协作的情况下难以管理代码,
+	我们想要低耦合，可复用，并且容易维护的JS模块，开发者仅仅关心自己的业务代码，其他都加载别人写好的模块 
+-->
 							
 					</script>
 				</section>
 <!-- 模块化编程 -->
 				<section data-markdown>
 					<script type="text/template">
-						# *Module?*
+						# *Module*
 						模块化编程
-
-<!--拆分原本巨大的js文件，把独立的逻辑放到单文件里，被其他文件引用，然后把需要的js文件块引入到页面上-->
+<!-- 具体要怎样来编写模块，用javascript实现模块化编程 -->
 					</script>
 				</section>
 
 				<section data-markdown>
 					<script type="text/template">
-						最早，我们这么写代码
+						Start
 
 						```javascript
 						function foo(){
@@ -96,7 +99,7 @@
 
 				<section data-markdown>
 					<script type="text/template">
-						简单封装：*Namespace* 模式
+						用*Namespace*封装
 
 						```javascript
 						var Moudle = {
@@ -139,12 +142,11 @@
 
 				<section data-markdown>
 					<script type="text/template">
-						再增强一点：引入依赖
+						引入依赖
 
 						```javascript
 						var Module = (function($){
-							var _$body = $("body");		//we can use jQuery now!
-
+							var _$body = $("body");
 							var foo = function(){
 								console.log(_$body);
 							}
@@ -161,6 +163,7 @@
 
 					</script>
 				</section>
+
 <!-- 模块化规范 -->
 				<section data-markdown>
 					<script type="text/template">
@@ -182,13 +185,13 @@
 
 						####*顺序非常重要*
 						<!-- .element: class="fragment" -->
-						<!-- DOM 顺序即执行顺序 -->
 					</script>
 				</section>
-
+<!-- DOM 顺序即执行顺序 -->
+				
 				<section data-markdown>
 					<script type="text/template">
-						但现实是这样的...
+						但是在实际开发中...
 
 						```
 						body
@@ -199,8 +202,8 @@
 							script(src="icon.js")
 							script(src="button.js")
 							script(src="header.js")
-							script(src="content.js")
 							script(src="home.js")
+							...
 							script(src="app.js")
 							script(src="main.js")
 						```
@@ -217,7 +220,7 @@
 
 					</script>
 				</section>
-<!-- 依赖模糊，需要哪些模块, 模块的载入顺序必须由人工处理。
+<!-- 依赖模糊，需要哪些模块, 模块的载入顺序必须由人工处理，难以进行维护。
 	只有封装性可不够，我们还需要加载。很显然，模块之间互相依赖需要编写模块的时候遵循一定的规范。
 -->
 
@@ -227,6 +230,7 @@
 						# *CommonJS*
 					</script>
 				</section>
+<!-- CommonJS是为JS的表现来制定de规范，因为js没有模块的功能所以CommonJS应运而生。-->
 
 				<section>
 					<section data-markdown>
@@ -238,7 +242,9 @@
 							<img src="attach/commonjs-logo.png" class="logo" style="max-width:200px" />
 
 							> *javascript: not just for browsers any more!*
-<!-- CommonJS是为JS的表现来制定de规范，因为js没有模块的功能所以CommonJS应运而生，它希望js可以在任何地方运行，不只是浏览器中。
+						</script>
+					</section>
+<!--
 	这个项目最开始是由 Mozilla 的工程师 Kevin Dangoor 在2009年1月创建的，当时的名字是 ServerJS。
 	2009年8月，这个项目改名为 CommonJS，来显示它 API 的更广泛的实用性。
 	CommonJS API定义了很多普通应用程序（主要指非浏览器的应用）使用的API，它的终极目标是提供一个类似Python，Ruby和Java标准库。
@@ -247,8 +253,7 @@
 
 <!--  CommonJS能有一定的影响力，离不开Node的人气，那么，Node，CommonJS，浏览器甚至是W3C之间有什么关系呢
 -->
-						</script>
-					</section>
+
 					<section>
 						<div style="font-size: 29px">
 
@@ -299,7 +304,7 @@
 							exports? module.exports?
 							```javascript
 								module.exports.hello = true;
-								exports = { hello: false };  //not exported
+								exports = { hello: false };  // not exported
 							```
 
 							```javascript
@@ -362,20 +367,8 @@
 				</section>
 <!-- 都是模块规范，他们定义了一种模块机制，这种机制下，模块和它的依赖可以异步的加载。
 -->
-				<section data-markdown>
-					<script type="text/template">
-						## *[AMD(Async Module Definition)](http://wiki.commonjs.org/wiki/Modules/AsynchronousDefinition)*
-
-						RequireJS 对模块定义的规范化产出
-
-						<br>
-
-						## *[CMD(Common Module Definition)](https://github.com/cmdjs/specification/blob/master/draft/module.md)*
-
-						SeaJS 对模块定义的规范化产出
-
-					</script>
-				</section>
+<!--AMD RequireJS 对模块定义的规范化产出 -->
+<!--CMD SeaJS 对模块定义的规范化产出 -->
 
 				<section data-markdown>
 					<script type="text/template">
@@ -397,7 +390,7 @@
 						异步的`require()`
 
 						```
-						//CommonJS 语法
+						// CommonJS 语法
 						var Employee = require("types/Employee");
 
 						function Programmer (){
@@ -406,8 +399,8 @@
 
 						Programmer.prototype = new Employee();
 
-						//如果 require 是异步的，那么肯定 error
-						//因为在执行这句前 Employee 模块根本来不及加载进来
+						// 如果 require 是异步的，那么肯定 error
+						// 因为在执行这句前 Employee 模块根本来不及加载进来
 						```
 					</script>
 				</section>
@@ -548,7 +541,8 @@
 						# *Browserify/Webpack*
 					</script>
 				</section>
-<!-- 是预编译模块的方案, 它是预编译的，不需要在浏览器中加载解释器, 用它可以本地直接写JS，不管是什么风格的模块化，它都能认识，并且编译成浏览器认识的JS。 -->	
+<!-- Browserify/Webpack, 是预编译模块的方案 -->
+<!-- 就模块及依赖管理这个问题而言，已经有RequireJS这些优秀的作品。 -->
 
 				<section data-markdown>
 					<script type="text/template">
@@ -606,8 +600,10 @@
 						> *require('modules') in the browser by bundling up all of your dependencies*
 					</script>
 				</section>
-<!-- 就模块及依赖管理这个问题而言，已经有RequireJS这些优秀的作品。而现在，Browserify又给了我们新的选择。 -->
-<!-- Browserify 跟其它模块化方案有点不同，它并非在「运行时」加载模块，而是在「构建时」对模块进行打包。-->
+<!-- 
+	Browserify 跟其它模块化方案不同，它并非在「运行时」加载模块，不需要在浏览器中加载解释器，
+	而是在「构建时」对模块进行打包，用它可以本地直接写JS，不管是什么风格的模块化，它都能认识，并且编译成浏览器认识的JS。 
+-->	
 
 				<section data-markdown>
 					<script type="text/template">
@@ -631,6 +627,7 @@
 <!-- Browserify将递归分析你的代码中的require()，然后生成编译后的文件（这里的bundle.js）。
 	在编译后的文件内，所有JavaScript模块都已合并在一起且建立好了依赖关系。最后，你在html里引用这个编译后的文件。
 -->
+
 <!-- 
 	1. 从入口模块开始，分析代码中require函数的调用
 	2. 生成AST (Abstract Syntax Tree)
@@ -677,7 +674,7 @@ Instagram 工程师认为这个方案很棒, 似乎还把作者招过去了 -->
 				<section>
 					<section data-markdown>
 						<script type="text/template">
-							## DEMO TIME
+							### Demo Time
 	
 							```
 							// module.js
@@ -812,7 +809,7 @@ Instagram 工程师认为这个方案很棒, 似乎还把作者招过去了 -->
 
 				<section data-markdown>
 					<script type="text/template">
-						#### *require(静态资源)* 
+						#### *require(static resource)* 
 
 						```javascript
 						require('./bootstrap.css');
@@ -820,9 +817,6 @@ Instagram 工程师认为这个方案很棒, 似乎还把作者招过去了 -->
 						var myImage = document.createElement('img');
 						myImage.src = require('./myImage.jpg');
 						```
-						
-						*包含静态资源的依赖管理*
-						<!-- .element: class="fragment" -->
 					</script>
 				</section>
 
@@ -875,7 +869,7 @@ Instagram 工程师认为这个方案很棒, 似乎还把作者招过去了 -->
 				</section>
 				<section data-markdown>
 					<script type="text/template">
-						### Treeshaking
+						### *Treeshaking*
 
 						```javascript
 						// foo.js
@@ -916,15 +910,11 @@ Instagram 工程师认为这个方案很棒, 似乎还把作者招过去了 -->
 					<!-- .element: class="fragment" -->
 					</script>
 				</section>
-
-<!-- HMR简单说就是webpack启动一个本地webserver（webpack-dev-server），负责处理由webpack生成的静态资源请求。注意webpack-dev-server把所有资源存储在内存的
--->
 <!-- HMR 是 webpack 发展至今引入的最令人兴奋的特性之一 ，当你对代码进行修改并保存后，webpack 将对代码重新打包， -->
 <!-- 并将新的模块发送到浏览器端，浏览器通过新的模块替换老的模块，这样在不刷新浏览器的前提下就能够对应用进行更新。 -->
-<!-- 例如，在开发 Web 页面过程中，当你点击按钮，出现一个弹窗的时候，发现弹窗标题没有对齐， -->
-<!-- 这时候你修改 CSS 样式，然后保存，在浏览器没有刷新的前提下，标题样式发生了改变。感觉就像在 Chrome 的开发者工具中直接修改元素样式一样 -->
-<!-- live reload 工具并不能够保存应用的状态（states），当刷新页面后，应用之前状态丢失，还是上文中的例子，点击按钮出现弹窗，当浏览器刷新后，弹窗也随即消失，要恢复到之前状态，还需再次点击按钮。 -->
+<!-- live reload 工具并不能够保存应用的状态（states），当刷新页面后，应用之前状态丢失，点击按钮出现弹窗，当浏览器刷新后，弹窗也随即消失，要恢复到之前状态，还需再次点击按钮。 -->
 <!-- 而 webapck HMR 则不会刷新浏览器，而是运行时对模块进行热替换，保证了应用状态不会丢失，提升了开发效率。 -->
+
 				<section data-markdown>
 					<script type="text/template">
 						*install webpack-dev-server*						
@@ -959,9 +949,8 @@ Instagram 工程师认为这个方案很棒, 似乎还把作者招过去了 -->
 
 				<section data-markdown data-background-size="auto" data-background-image="attach/hmr.jpg">
 				</section>
-
 <!-- Webpack就是一个更出色的前端自动化构建工具、模块化工具、资源管理工具。
--->
+-->			
 				<section data-markdown>
 					<script type="text/template">
 						# *ES6 Module*
